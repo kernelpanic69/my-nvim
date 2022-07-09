@@ -2,7 +2,9 @@ return require("packer").startup(function()
 	use("wbthomason/packer.nvim")
 	use("neovim/nvim-lspconfig")
 	use("sainnhe/everforest")
-	use("sainnhe/gruvbox-material")
+    use { "ellisonleao/gruvbox.nvim" }
+    use {'mhartington/oceanic-next'}
+    use 'Mofiqul/vscode.nvim'
 	use("marko-cerovac/material.nvim")
 	use({ "catppuccin/nvim", as = "catppuccin" })
 
@@ -23,19 +25,15 @@ return require("packer").startup(function()
 	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
-		config = function()
-			require("lualine").setup()
-		end,
+        config = function ()
+            require('lualine').setup{}
+        end
 	})
 
-	use({
-		"nanozuki/tabby.nvim",
-		config = function()
-			require("tabby").setup({
-				tabline = require("tabby.presets").tab_with_top_win,
-			})
-		end,
-	})
+    use {
+        'romgrk/barbar.nvim',
+        requires = {'kyazdani42/nvim-web-devicons'}
+    }
 
 	use({
 		"windwp/nvim-autopairs",
@@ -72,14 +70,6 @@ return require("packer").startup(function()
 			})
 		end,
 	})
-
-	-- use({
-	-- 	"olimorris/persisted.nvim",
-	-- 	config = function()
-	-- 		require("persisted").setup({})
-	-- 		require("telescope").load_extension("persisted") -- To load the telescope extension
-	-- 	end,
-	-- })
 
 	use({
 		"folke/which-key.nvim",
@@ -154,13 +144,13 @@ return require("packer").startup(function()
 
     use 'diepm/vim-rest-console'
 
-	use("matbme/JABS.nvim", {
-		config = function() end,
-	})
-
-	require("jabs").setup({
-        position = "center",
-        width = 50,
-        height = 20,
+    -- Lua
+    use({
+        "olimorris/persisted.nvim",
+        --module = "persisted", -- For lazy loading
+        config = function()
+            require("persisted").setup()
+            require("telescope").load_extension("persisted") -- To load the telescope extension
+        end,
     })
 end)
